@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --color-navy: #2F3A55;
+  --color-slate: #5C6B8A;
+  --color-warm-gray: #6E6F73;
+  --color-linen: #E7E2DE;
+  --color-bg: #F5F6F3;
+  --color-white: #FFFFFF;
+  --color-danger: #C0392B;
+  --color-danger-light: #FDECEA;
+  --color-success: #27AE60;
+  --color-success-light: #EAFAF1;
+  --color-info: #2471A3;
+  --color-info-light: #EAF4FB;
+  --color-warning: #D68910;
+  --color-warning-light: #FEF9E7;
+  
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  
+  --shadow-sm: 0 1px 3px rgba(47, 58, 85, 0.08);
+  --shadow-md: 0 4px 12px rgba(47, 58, 85, 0.10);
+  --shadow-lg: 0 8px 24px rgba(47, 58, 85, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-navy);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* No rounded corners anywhere */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* Remove number input spinner arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-linen); }
+::-webkit-scrollbar-thumb { background: var(--color-slate); }
+
+/* Typography */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; }
+
+/* Input base */
+input, select, textarea {
+  font-family: var(--font-body);
+  font-weight: 400;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-slate) !important;
+}
+
+/* Button base */
+button { font-family: var(--font-body); cursor: pointer; }
+
+/* Released row coloring */
+.row-released { background-color: #FFF5F5; }
+.row-renewed { background-color: #F0F5FF; }
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.25s ease-out; }
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+}
