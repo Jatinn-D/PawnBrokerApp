@@ -51,12 +51,14 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (mobile, password) => {
-    // Step 1: Let Express safely look up the email without RLS blocking it
-    const res = await api.post("/api/auth/lookup-email", { mobile });
-    const { email } = res.data;
+    let email;
+    try {
+      const res = await api.post("/auth/lookup-email", { mobile });
+      email = res.data.email;
+    } catch {
+      throw new Error("Invalid mobile number or password");
+    }
 
-    // Step 2: Log into Supabase natively in the browser!
-    // (This triggers onAuthStateChange automatically, safely saving the token)
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
