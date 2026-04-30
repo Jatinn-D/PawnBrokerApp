@@ -41,7 +41,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 if (process.env.NODE_ENV === 'production') {
   setInterval(async () => {
     try {
-      await fetch(`${process.env.CLIENT_URL || 'https://vaulta-api.onrender.com'}/health`);
+      await fetch(`${process.env.CLIENT_URL || 'https://pawnbrokerapp.onrender.com'}/health`);
     } catch {}
   }, 10 * 60 * 1000); // ping every 10 minutes
 }
