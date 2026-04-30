@@ -86,7 +86,7 @@ router.post('/forgot-password', async (req, res) => {
     if (!email) return res.status(400).json({ error: 'Email is required' });
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'http://localhost:5173/reset-password', // Make sure this matches your frontend URL!
+      redirectTo: 'https://pawnbrokerapp.pages.dev/reset-password', // Make sure this matches your frontend URL!
     });
 
     if (error) return res.status(400).json({ error: error.message });
