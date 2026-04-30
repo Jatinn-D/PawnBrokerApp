@@ -35,6 +35,17 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'The server is running' });
 });
 
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
+// Keep-alive ping to prevent Render free tier from sleeping
+if (process.env.NODE_ENV === 'production') {
+  setInterval(async () => {
+    try {
+      await fetch(`${process.env.CLIENT_URL || 'https://vaulta-api.onrender.com'}/health`);
+    } catch {}
+  }, 10 * 60 * 1000); // ping every 10 minutes
+}
+
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}`);
 });
