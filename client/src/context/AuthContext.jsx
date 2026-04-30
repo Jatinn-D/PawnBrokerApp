@@ -53,7 +53,7 @@ export function AuthProvider({ children }) {
   const login = async (mobile, password) => {
     let email;
     try {
-      const res = await api.post("/auth/lookup-email", { mobile });
+      const res = await api.post("/api/auth/lookup-email", { mobile });
       email = res.data.email;
     } catch {
       throw new Error("Invalid mobile number or password");
