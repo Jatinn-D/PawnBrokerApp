@@ -205,12 +205,13 @@ export default function AppLayout() {
                 alignItems: "center",
                 overflow: "hidden",
                 fontFamily: "var(--font-display)",
-                fontSize: "20px",
+                fontSize: "22px",
                 color: "var(--color-navy)",
                 whiteSpace: "nowrap",
+                fontStyle: "italic",
               }}
             >
-              Asha Pawn Broker
+              Suvarna
             </div>
           )}
           {/* Show the small logo icon if we are collapsed (Mobile or Desktop) */}
@@ -522,17 +523,8 @@ export default function AppLayout() {
             </button>
 
             {/* Logo and Name */}
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <VaultaLogo size={20} />
-              <span
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "17px",
-                  color: "var(--color-navy)",
-                }}
-              >
-                Asha Pawn Broker
-              </span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-display)", fontSize: "20px", color: "var(--color-navy)", fontStyle: "italic" }}>
+                Suvarna
             </div>
           </div>
 

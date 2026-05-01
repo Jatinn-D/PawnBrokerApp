@@ -1,7 +1,7 @@
 /**
  * PawnTicket.jsx
  *
- * Renders the Asha Pawn Broker pawn ticket with bill data overlaid
+ * Renders the SUVARNA pawn ticket with bill data overlaid
  * on the printed template.  Works in two modes:
  *   1. Preview modal  — shown inside the app before printing
  *   2. Print-only div — injected into a hidden iframe for window.print()

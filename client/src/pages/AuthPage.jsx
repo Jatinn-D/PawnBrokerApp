@@ -814,15 +814,15 @@ export default function AuthPage() {
             gap: "10px",
           }}
         >
-          <VaultaLogo size={28} color="var(--color-linen)" />
           <span
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "22px",
+              fontSize: "42px",
               color: "var(--color-linen)",
+              fontStyle: "italic",
             }}
           >
-            Asha Pawn Broker
+            Suvarna
           </span>
         </div>
 

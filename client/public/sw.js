@@ -1,9 +1,23 @@
 const CACHE = 'vaulta-v1';
-const STATIC = ['/', '/index.html'];
+
+// Only cache actual static files, NOT app routes
+const STATIC_FILES = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/pawn-ticket.png',
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(STATIC))
+    caches.open(CACHE).then(c => {
+      // Use individual try-catch so one failure doesn't break everything
+      return Promise.allSettled(
+        STATIC_FILES.map(url => c.add(url).catch(() => {}))
+      );
+    })
   );
   self.skipWaiting();
 });
@@ -18,12 +32,39 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Network first for API calls, cache first for static assets
-  if (e.request.url.includes('/api/')) {
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-  } else {
-    e.respondWith(
-      caches.match(e.request).then(cached => cached || fetch(e.request))
-    );
+  const url = new URL(e.request.url);
+
+  // Skip non-GET requests
+  if (e.request.method !== 'GET') return;
+
+  // Skip API calls entirely — always go to network
+  if (url.href.includes('/api/') ||
+      url.href.includes('supabase.co') ||
+      url.href.includes('onrender.com')) {
+    e.respondWith(fetch(e.request));
+    return;
   }
+
+  // For app navigation routes — always serve index.html from network/cache
+  // This handles /dashboard, /settings, /database etc.
+  if (url.origin === self.location.origin && !url.pathname.includes('.')) {
+    e.respondWith(
+      fetch('/index.html').catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
+
+  // For static assets — cache first, network fallback
+  e.respondWith(
+    caches.match(e.request).then(cached => {
+      return cached || fetch(e.request).then(response => {
+        // Cache successful responses
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
+        }
+        return response;
+      });
+    }).catch(() => caches.match('/index.html'))
+  );
 });

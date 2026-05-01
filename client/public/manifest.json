@@ -1,7 +1,7 @@
 {
-  "name": "Vaulta — Asha Pawn Broker",
+  "name": "Suvarna — Pledge Management System",
   "short_name": "Vaulta",
-  "description": "Pledge management system for Asha Pawn Broker",
+  "description": "Pledge management system",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

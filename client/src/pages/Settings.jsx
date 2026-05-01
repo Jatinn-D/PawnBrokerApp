@@ -1228,8 +1228,9 @@ export default function Settings() {
               onClick={async () => {
                 try {
                   const token = localStorage.getItem("vaulta_token");
+                  const baseUrl = import.meta.env.VITE_API_URL || "";
                   const res = await fetch(
-                    `/api/settings/export/database?frequency=daily`,
+                    `${baseUrl}/api/settings/export/database?frequency=daily`,
                     {
                       headers: { Authorization: `Bearer ${token}` },
                     },
@@ -1564,8 +1565,9 @@ function AutoBackupScheduler() {
     setRunning(true);
     try {
       const token = localStorage.getItem("vaulta_token");
+      const baseUrl = import.meta.env.VITE_API_URL || "";
       const res = await fetch(
-        `/api/settings/export/database?frequency=${frequency}`,
+        `${baseUrl}/api/settings/export/database?frequency=${frequency}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },

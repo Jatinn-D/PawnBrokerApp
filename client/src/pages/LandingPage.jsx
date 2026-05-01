@@ -170,13 +170,13 @@ export default function LandingPage() {
     >
       {/* ── NAV ── */}
       <nav
+        className="nav-pad"
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "0 48px",
           height: "64px",
           display: "flex",
           alignItems: "center",
@@ -192,19 +192,20 @@ export default function LandingPage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <VaultaLogo size={28} />
           <span
             style={{
               fontFamily: "var(--font-display)",
               fontSize: "22px",
               color: "var(--color-navy)",
               letterSpacing: "0.02em",
+              fontStyle: "italic",
             }}
           >
-            Asha Pawn Broker
+            Suvarna
           </span>
         </div>
         <button
+          className="hide-on-mobile"
           onClick={handleGetStarted}
           style={{
             background: "var(--color-navy)",
@@ -285,8 +286,9 @@ export default function LandingPage() {
           </svg>
         </div>
 
-        {/* Decorative vault circle */}
+        {/* Decorative vault circle - Hidden on Mobile */}
         <div
+          className="hide-on-mobile"
           style={{
             position: "absolute",
             right: "-120px",
@@ -329,40 +331,15 @@ export default function LandingPage() {
 
         {/* Hero content */}
         <div
+          className="hero-pad"
           style={{
             position: "relative",
             zIndex: 2,
             maxWidth: "1200px",
             margin: "0 auto",
-            padding: "80px 48px",
           }}
         >
           <div style={{ maxWidth: "620px" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                border: "1px solid rgba(231, 226, 222, 0.25)",
-                padding: "6px 14px",
-                marginBottom: "36px",
-                color: "rgba(231, 226, 222, 0.7)",
-                fontSize: "12px",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-              }}
-            >
-              <span
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  background: "#6adf9f",
-                  display: "inline-block",
-                }}
-              />
-              Pledge Management System
-            </div>
-
             <h1
               style={{
                 fontFamily: "var(--font-display)",
@@ -418,7 +395,7 @@ export default function LandingPage() {
                   letterSpacing: "0.04em",
                   cursor: "pointer",
                   transition: "all 0.2s",
-                  display: "flex",
+                  display: "inline-flex",
                   alignItems: "center",
                   gap: "10px",
                 }}
@@ -431,7 +408,7 @@ export default function LandingPage() {
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                Get Started Free
+                Get Started
                 <svg
                   width="16"
                   height="16"
@@ -443,11 +420,6 @@ export default function LandingPage() {
                   <path strokeLinecap="square" d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </button>
-              <span
-                style={{ color: "rgba(231,226,222,0.35)", fontSize: "13px" }}
-              >
-                No app store needed · Works on any device
-              </span>
             </div>
           </div>
         </div>
@@ -482,31 +454,14 @@ export default function LandingPage() {
             <path strokeLinecap="square" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-
-        <style>{`
-          @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(6px); }
-          }
-        `}</style>
       </section>
 
       {/* ── PROBLEM STATEMENT ── */}
       <section
-        style={{
-          padding: "100px 48px",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
+        className="section-pad"
+        style={{ maxWidth: "1200px", margin: "0 auto" }}
       >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "80px",
-            alignItems: "center",
-          }}
-        >
+        <div className="problem-grid">
           <div>
             <p
               style={{
@@ -583,12 +538,9 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div
                 key={i}
+                className="compare-grid"
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "1px",
                   border: "1px solid var(--color-linen)",
-                  overflow: "hidden",
                   animation: `fadeIn 0.4s ease-out ${i * 0.08}s both`,
                 }}
               >
@@ -674,10 +626,8 @@ export default function LandingPage() {
 
       {/* ── FEATURES GRID ── */}
       <section
-        style={{
-          background: "var(--color-navy)",
-          padding: "100px 48px",
-        }}
+        className="section-pad"
+        style={{ background: "var(--color-navy)" }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "72px" }}>
@@ -767,7 +717,8 @@ export default function LandingPage() {
 
       {/* ── HOW IT WORKS ── */}
       <section
-        style={{ padding: "100px 48px", maxWidth: "1200px", margin: "0 auto" }}
+        className="section-pad"
+        style={{ maxWidth: "1200px", margin: "0 auto" }}
       >
         <div style={{ textAlign: "center", marginBottom: "72px" }}>
           <p
@@ -842,8 +793,10 @@ export default function LandingPage() {
               >
                 {s.desc}
               </p>
+
               {i < steps.length - 1 && (
                 <div
+                  className="hide-on-mobile"
                   style={{
                     position: "absolute",
                     top: "50%",
@@ -851,7 +804,6 @@ export default function LandingPage() {
                     transform: "translateY(-50%)",
                     zIndex: 2,
                     color: "var(--color-linen)",
-                    display: "none",
                   }}
                 >
                   <svg
@@ -872,21 +824,10 @@ export default function LandingPage() {
       </section>
 
       {/* ── PWA CALLOUT ── */}
-      <section
-        style={{
-          background: "var(--color-linen)",
-          padding: "72px 48px",
-        }}
-      >
+      <section className="pwa-pad" style={{ background: "var(--color-linen)" }}>
         <div
-          style={{
-            maxWidth: "900px",
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            gap: "60px",
-            flexWrap: "wrap",
-          }}
+          className="pwa-flex"
+          style={{ maxWidth: "900px", margin: "0 auto" }}
         >
           <div style={{ flex: 1, minWidth: "260px" }}>
             <p
@@ -993,8 +934,8 @@ export default function LandingPage() {
 
       {/* ── FINAL CTA ── */}
       <section
+        className="cta-pad"
         style={{
-          padding: "120px 48px",
           background: "var(--color-navy)",
           textAlign: "center",
           position: "relative",
@@ -1086,33 +1027,54 @@ export default function LandingPage() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer
+      <div
         style={{
-          padding: "32px 48px",
-          background: "#222d3f",
-          display: "flex",
+          fontSize: "12px",
           alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "16px",
+          justifyContent: "center",
+          display: "flex",
+          fontStyle: "Italic",
+          marginTop: "20px",
+          marginBottom: "20px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <VaultaLogo size={20} color="rgba(231,226,222,0.4)" />
-          <span
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "16px",
-              color: "rgba(231,226,222,0.4)",
-            }}
-          >
-            Asha Pawn Broker
-          </span>
-        </div>
-        <span style={{ color: "rgba(231,226,222,0.25)", fontSize: "12px" }}>
-          Built with love for a business that runs on trust.
-        </span>
-      </footer>
+        ˗ˋˏ Built with love by Jatin ♡ ˎˊ˗
+      </div>
+
+      {/* ── RESPONSIVE STYLES ── */}
+      <style>{`
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+        .nav-pad { padding: 0 48px; }
+        .hero-pad { padding: 80px 48px; }
+        .section-pad { padding: 100px 48px; }
+        .pwa-pad { padding: 72px 48px; }
+        .cta-pad { padding: 120px 48px; }
+        .footer-pad { padding: 32px 48px; }
+        
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; alignItems: center; }
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; border: 1px solid var(--color-linen); overflow: hidden; }
+        .pwa-flex { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+        .footer-flex { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+        @media (max-width: 768px) {
+          .nav-pad { padding: 0 20px !important; }
+          .hide-on-mobile { display: none !important; }
+          .hero-pad { padding: 60px 20px 80px !important; }
+          .section-pad { padding: 60px 20px !important; }
+          .pwa-pad { padding: 60px 20px !important; }
+          .cta-pad { padding: 80px 20px !important; }
+          .footer-pad { padding: 32px 20px !important; }
+
+          .problem-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .compare-grid { grid-template-columns: 1fr !important; }
+          .pwa-flex { gap: 32px !important; flex-direction: column; align-items: flex-start !important; }
+          .footer-flex { flex-direction: column !important; justify-content: center !important; text-align: center; }
+        }
+      `}</style>
     </div>
   );
 }
