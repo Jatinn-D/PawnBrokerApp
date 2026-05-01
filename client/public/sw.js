@@ -34,40 +34,44 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // Skip non-GET requests
   if (e.request.method !== 'GET') return;
 
-  // Skip API calls entirely — always go to network
+  // Skip API calls
   if (url.href.includes('/api/') ||
       url.href.includes('supabase.co') ||
       url.href.includes('onrender.com')) {
     return;
   }
 
-  // For app navigation routes — always serve index.html from network/cache
-  // This handles /dashboard, /settings, /database etc.
+  // Handle navigation routes
   if (url.origin === self.location.origin && !url.pathname.includes('.')) {
     e.respondWith(
-      fetch('/index.html').catch(() => caches.match('/index.html'))
+      fetch(e.request)
+        .then(response => {
+          // If response is a redirect, don't cache it
+          if (response.redirected) {
+            return response;
+          }
+          // Clone and cache only non-redirect responses
+          const clone = response.clone();
+          caches.open(CACHE).then(cache => cache.put(e.request, clone));
+          return response;
+        })
+        .catch(() => caches.match('/index.html'))
     );
     return;
   }
 
-  // For static assets — cache first, network fallback
-  // For static assets — cache first, network fallback
+  // For static assets — cache-first
   e.respondWith(
     caches.match(e.request).then(cached => {
       return cached || fetch(e.request).then(response => {
-        
-        // ADDED FIX: Only cache successful responses that are HTTP/HTTPS!
-        // This stops it from trying to cache 'chrome-extension://' URLs
         if (response.ok && e.request.url.startsWith('http')) {
           const clone = response.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
-        
         return response;
       });
     }).catch(() => caches.match('/index.html'))
   );
-});
+});   
