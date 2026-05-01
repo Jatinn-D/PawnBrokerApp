@@ -41,7 +41,6 @@ self.addEventListener('fetch', e => {
   if (url.href.includes('/api/') ||
       url.href.includes('supabase.co') ||
       url.href.includes('onrender.com')) {
-    e.respondWith(fetch(e.request));
     return;
   }
 
