@@ -54,14 +54,18 @@ self.addEventListener('fetch', e => {
   }
 
   // For static assets — cache first, network fallback
+  // For static assets — cache first, network fallback
   e.respondWith(
     caches.match(e.request).then(cached => {
       return cached || fetch(e.request).then(response => {
-        // Cache successful responses
-        if (response.ok) {
+        
+        // ADDED FIX: Only cache successful responses that are HTTP/HTTPS!
+        // This stops it from trying to cache 'chrome-extension://' URLs
+        if (response.ok && e.request.url.startsWith('http')) {
           const clone = response.clone();
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
+        
         return response;
       });
     }).catch(() => caches.match('/index.html'))
