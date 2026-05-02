@@ -399,10 +399,10 @@ function FilterPanel({ filters, onChange, onClose }) {
   );
   return (
     <div
+      className="filter-dropdown"
       style={{
         position: "absolute",
         top: "100%",
-        right: 0,
         marginTop: "6px",
         background: "var(--color-bg)",
         border: "1px solid var(--color-linen)",
@@ -1424,7 +1424,21 @@ export default function Database() {
         />
       )}
 
-      <style>{`@keyframes fadeIn { from { opacity:0; transform:translateY(4px) } to { opacity:1; transform:translateY(0) } }`}</style>
+      <style>{`
+        @keyframes fadeIn { 
+          from { opacity:0; transform:translateY(4px) } 
+          to { opacity:1; transform:translateY(0) } 
+        }
+        
+        .filter-dropdown { right: 0; }
+        
+        @media (max-width: 768px) {
+          .filter-dropdown { 
+            right: auto; 
+            left: 0; 
+          }
+        }
+      `}</style>
     </div>
   );
 }
